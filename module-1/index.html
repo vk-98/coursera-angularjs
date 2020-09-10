@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myApp'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script>
+        angular.module('myApp',[])
+        .controller('myController', ['$scope', function($scope){
+            console.log('connected');
+            $scope.data = '';
+            $scope.message = 'Nothing';
+            $scope.emptyDataMessage = 'Please enter data first';
+            $scope.enjoyMessage = 'Enjoy!';
+            $scope.tooMuchMessage = 'Too Much!';
+            $scope.updateMessage = function(){
+                if($scope.data.length==0){
+                    $scope.message = $scope.emptyDataMessage;
+                }else{
+                    let content = $scope.data.split(",");
+                    if(content.length<=3){
+                        $scope.message = $scope.enjoyMessage;
+                    }else{
+                        $scope.message = $scope.tooMuchMessage;
+                    }
+                }
+            }
+
+        }]);
+    </script>
+    <title>Module-1 Solution</title>
+</head>
+<body ng-controller='myController'>
+    <input type="text" ng-model='data'><br>
+    Message = {{message}}
+    <br>
+    <button ng-click='updateMessage()'>Check If Too Much</button>
+</body>
+</html>
